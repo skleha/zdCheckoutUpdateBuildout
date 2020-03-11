@@ -53,19 +53,28 @@ class SupportUpdate extends React.Component {
 
 
   async handleSubscriptionChange(plan, planName, seats) {
-    const { cost } = await this.props.fetchPlanPricing(plan, seats);
-    const selectedPlan = new SupportPlan(plan, planName, seats, cost);
-    const currentPlan = this.props.currentPlan;
+  
+    if (isNaN(seats) || seats <= 0) {
+      this.state.selectedPlan.cost = "-";
+      this.setState({
+        updateButtonEnabled: false
+      })
 
-    const {
-      hasPlanChanged,
-      hasSeatsChanged
-    } = supportHelper.hasSubscriptionChanged(selectedPlan, currentPlan);
+    }  else {
+      const { cost } = await this.props.fetchPlanPricing(plan, seats);
+      const selectedPlan = new SupportPlan(plan, planName, seats, cost);
+      const currentPlan = this.props.currentPlan;
 
-    this.setState({
-      selectedPlan,
-      updateButtonEnabled: hasPlanChanged || hasSeatsChanged
-    });
+      const {
+        hasPlanChanged,
+        hasSeatsChanged
+      } = supportHelper.hasSubscriptionChanged(selectedPlan, currentPlan);
+
+      this.setState({
+        selectedPlan,
+        updateButtonEnabled: hasPlanChanged || hasSeatsChanged
+      });
+    }
   
   }
 
