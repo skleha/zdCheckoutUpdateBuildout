@@ -1,0 +1,128 @@
+
+/* UPDATE PAGE */
+
+.update {
+  padding: 20px;
+}
+
+.update-title {
+  margin-bottom: 20px;
+}
+
+/* UPDATE COMPONENT */
+
+.update-component {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  width: 500px;
+}
+
+.update-product {
+  height: 60px;
+  width: 110px;
+  padding-top: 35px;
+  border-right: 1px solid darkgrey;
+}
+
+.update-grid {
+  display: grid;
+  grid-template-columns: 80px 80px 40px;
+  grid-row-gap: 8px;
+  grid-column-gap: 10px;
+  margin: 0px 20px;
+}
+
+.update-header {
+  justify-self: center;
+  font-size: 14px;
+}
+
+.update-select {
+  justify-self: center;
+  font-size: 14px;
+  width: 75px;
+}
+
+.update-input {
+  justify-self: center;
+  width: 50px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.update-cost {
+  justify-self: center;
+  align-self: center;
+  font-size: 14px;
+
+}
+
+button {
+  font-size: 14px;
+  background-color: #164D4C;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  color: darkgrey;
+}
+
+/* CONFIRM PAGE */
+
+.confirm {
+ padding: 20px; 
+}
+
+.confirm-title {
+  margin-bottom: 20px;
+}
+
+
+/* CONFIRM COMPONENT */
+
+.confirm-component {
+  padding: 20px;
+  background-color: lightgrey;
+  border-radius: 5px;
+  width: 500px;
+}
+
+.confirm-component-title {
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.confirm-grid-container {
+  display: grid;
+  grid-template-columns: 120px 200px 200px;
+  grid-row-gap: 15px;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.confirm-grid-header {
+  justify-self: center;
+  border-bottom: 1px solid black;
+}
+
+.confirm-grid-data {
+  justify-self: center;
+}
+
+.confirm-grid-data.changed {
+  color: royalblue;
+  font-weight: bold; 
+}
+
+.confirm-back-button {
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}

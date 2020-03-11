@@ -1,0 +1,20 @@
+{
+  "plugins": [
+    [
+      "@babel/plugin-transform-destructuring",
+      {
+        "useBuiltIns": true
+      }
+    ],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "absoluteRuntime": false,
+        "corejs": 3,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
+    ]
+  ]
+}
