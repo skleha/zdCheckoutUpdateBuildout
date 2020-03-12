@@ -1,12 +1,16 @@
 import React from "react";
 import * as supportHelper from '../../helpers/supportHelpers';
 import SupportPlan from "../../models/SupportPlan";
+import * as SupportAPIUtil from "../../utils/support_api_util";
+
 
 class SupportUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentPlan: "",
       selectedPlan: "",
+      plansAndNames: "",
       isLoading: true,
       updateButtonEnabled: false
     }
@@ -17,21 +21,24 @@ class SupportUpdate extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchCurrentPlan()
-    const { plan, name, seats, cost } = this.props.currentPlan;
+    const currentPlan = await SupportAPIUtil.fetchCurrentPlan(this.props.product);
+    const plansAndNames = await SupportAPIUtil.fetchAvailablePlans(
+      this.props.product
+    );
+    const { plan, name, seats, cost } = currentPlan;
     
     this.setState({
+      currentPlan: new SupportPlan(plan, name, seats, cost),
       selectedPlan: new SupportPlan(plan, name, seats, cost),
+      plansAndNames,
       isLoading: false,
       });
-
-    this.props.fetchAvailablePlans();
   }
 
 
   handlePlanChange(e) {
     const selectedPlan = e.target.value;
-    const selectedName = this.props.plansAndNames[selectedPlan];
+    const selectedName = this.state.plansAndNames[selectedPlan];
   
     this.handleSubscriptionChange(
       selectedPlan,
@@ -54,9 +61,9 @@ class SupportUpdate extends React.Component {
 
   async handleSubscriptionChange(plan, planName, seats) {
   
-    const { cost } = await this.props.fetchPlanPricing(plan, seats);
+    const { cost } = await SupportAPIUtil.fetchPlanPricing(this.props.product, plan, seats);
     const selectedPlan = new SupportPlan(plan, planName, seats, cost);
-    const currentPlan = this.props.currentPlan;
+    const currentPlan = this.state.currentPlan;
 
     const {
       hasPlanChanged,
@@ -73,14 +80,14 @@ class SupportUpdate extends React.Component {
 
 
   async handleUpdatePlanClick(e) {
-    await this.props.updateCurrentPlan(this.state.selectedPlan);
+    await SupportAPIUtil.updateCurrentPlan(this.state.selectedPlan);
     this.props.history.push("/confirm");
   }
 
 
   render() {
     if (this.state.isLoading) return "Loading...";
-    const plans = Object.keys(this.props.plansAndNames);
+    const plans = Object.keys(this.state.plansAndNames);
 
     return (
       <div className="update-component">
@@ -99,7 +106,7 @@ class SupportUpdate extends React.Component {
           >
             {plans.map((plan, idx) => (
               <option key={idx} value={plan}>
-                {this.props.plansAndNames[plan]}
+                {this.state.plansAndNames[plan]}
               </option>
             ))}
           </select>

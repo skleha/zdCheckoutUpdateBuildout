@@ -35,22 +35,22 @@ const receiveAvailPlans = availablePlans => {
 
 
 
-export const fetchCurrentPlan = () => dispatch => (
+export const fetchCurrentPlan = (product) => dispatch => (
   SupportAPIUtil.fetchCurrentPlan()
     .then(plan => dispatch(receiveCurrentPlan(plan)))
 );
 
-export const fetchPreviousPlan = () => dispatch => (
+export const fetchPreviousPlan = (product) => dispatch => (
   SupportAPIUtil.fetchPreviousPlan()
     .then(plan => dispatch(receivePreviousPlan(plan)))
 )
 
-export const fetchAvailablePlans = () => dispatch => (
+export const fetchAvailablePlans = (product) => dispatch => (
   SupportAPIUtil.fetchAvailablePlans()
     .then(plans => dispatch(receiveAvailPlans(plans)))
 );
 
-export const updateCurrentPlan = plan => dispatch => (
-  SupportAPIUtil.updateCurrentPlan(plan)
+export const updateCurrentPlan = (product, plan) => dispatch => (
+  SupportAPIUtil.updateCurrentPlan(product, plan)
     .then(plan => dispatch(receiveCurrentPlan(plan)))
 );
