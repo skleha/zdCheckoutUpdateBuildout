@@ -71,6 +71,7 @@ $.mockjax({
   }
 });
 
+
 //------------------------------------------------
 
 const CRM_PLAN_COSTS_USD = {
@@ -122,7 +123,6 @@ $.mockjax({
   url: "/api/crm/preview",
   type: "GET",
   response: function(request) {
-    console.log(request);
     this.responseText = {
       cost: request.data.seats * CRM_PLAN_COSTS_USD[request.data.plan]
     };
@@ -145,3 +145,6 @@ $.mockjax({
     this.responseText = crmCurrSubscription;
   }
 });
+
+
+//------------------------------------------------

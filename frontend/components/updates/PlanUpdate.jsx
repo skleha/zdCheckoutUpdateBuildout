@@ -89,6 +89,11 @@ class SupportUpdate extends React.Component {
     if (this.state.isLoading) return "Loading...";
     const plans = Object.keys(this.state.plansAndNames);
 
+    // conditional would determine if seats or minutes
+    // if seats, render this; if minutes, render that
+
+
+
     return (
       <div className="update-component">
         <div className="update-product">Support Plan:</div>
