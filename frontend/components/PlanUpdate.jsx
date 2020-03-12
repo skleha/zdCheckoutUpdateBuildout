@@ -2,6 +2,7 @@ import React from "react";
 import * as supportHelper from '../helpers/supportHelpers';
 import SupportPlan from "../models/SupportPlan";
 import * as SupportAPIUtil from "../utils/support_api_util";
+import { withRouter } from "react-router";
 
 
 class SupportUpdate extends React.Component {
@@ -75,12 +76,11 @@ class SupportUpdate extends React.Component {
       updateButtonEnabled: hasPlanChanged || hasSeatsChanged
     });
   
-  
   }
 
 
   async handleUpdatePlanClick(e) {
-    await SupportAPIUtil.updateCurrentPlan(this.state.selectedPlan);
+    await SupportAPIUtil.updateCurrentPlan(this.props.product, this.state.selectedPlan);
     this.props.history.push("/confirm");
   }
 
@@ -89,14 +89,10 @@ class SupportUpdate extends React.Component {
     if (this.state.isLoading) return "Loading...";
     const plans = Object.keys(this.state.plansAndNames);
 
-    // conditional would determine if seats or minutes
-    // if seats, render this; if minutes, render that
-
-
 
     return (
       <div className="update-component">
-        <div className="update-product">Support Plan:</div>
+        <div className="update-product">{`${this.props.product} Plan`}</div>
 
         <div className="update-grid">
           <div className="update-header">Plan</div>
@@ -139,4 +135,4 @@ class SupportUpdate extends React.Component {
   }
 }
 
-export default SupportUpdate;
+export default withRouter(SupportUpdate);
