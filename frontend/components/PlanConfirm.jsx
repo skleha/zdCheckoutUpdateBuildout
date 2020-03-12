@@ -1,8 +1,9 @@
 import React from "react";
 import classNames from 'classnames'
 import * as supportHelper from "../helpers/supportHelpers";
+import * as PlanAPIUtil from "../utils/plan_api_util";
 
-class SupportConfirm extends React.Component {
+class PlanConfirm extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true}
@@ -69,4 +70,4 @@ class SupportConfirm extends React.Component {
   }
 }
 
-export default SupportConfirm;
+export default PlanConfirm;

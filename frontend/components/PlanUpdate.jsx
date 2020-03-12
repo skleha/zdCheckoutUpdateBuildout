@@ -1,7 +1,7 @@
 import React from "react";
 import * as supportHelper from '../helpers/supportHelpers';
 import SupportPlan from "../models/SupportPlan";
-import * as SupportAPIUtil from "../utils/support_api_util";
+import * as PlanAPIUtil from "../utils/plan_api_util";
 import { withRouter } from "react-router";
 
 
@@ -22,8 +22,8 @@ class SupportUpdate extends React.Component {
   }
 
   async componentDidMount() {
-    const currentPlan = await SupportAPIUtil.fetchCurrentPlan(this.props.product);
-    const plansAndNames = await SupportAPIUtil.fetchAvailablePlans(
+    const currentPlan = await PlanAPIUtil.fetchCurrentPlan(this.props.product);
+    const plansAndNames = await PlanAPIUtil.fetchAvailablePlans(
       this.props.product
     );
     const { plan, name, seats, cost } = currentPlan;
@@ -62,7 +62,7 @@ class SupportUpdate extends React.Component {
 
   async handleSubscriptionChange(plan, planName, seats) {
   
-    const { cost } = await SupportAPIUtil.fetchPlanPricing(this.props.product, plan, seats);
+    const { cost } = await PlanAPIUtil.fetchPlanPricing(this.props.product, plan, seats);
     const selectedPlan = new SupportPlan(plan, planName, seats, cost);
     const currentPlan = this.state.currentPlan;
 
@@ -80,7 +80,7 @@ class SupportUpdate extends React.Component {
 
 
   async handleUpdatePlanClick(e) {
-    await SupportAPIUtil.updateCurrentPlan(this.props.product, this.state.selectedPlan);
+    await PlanAPIUtil.updateCurrentPlan(this.props.product, this.state.selectedPlan);
     this.props.history.push("/confirm");
   }
 

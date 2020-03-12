@@ -1,5 +1,4 @@
 
-
 class SupportPlan {
 
   constructor(plan, name, seats, cost) {
@@ -9,21 +8,6 @@ class SupportPlan {
     this.cost = cost;
   }
 
-  setPlan(plan) {
-    this.plan = plan;
-  }
-
-  setName(name) {
-    this.name = name;
-  }
-
-  setSeats(seats) {
-    this.seats = seats;
-  }
-
-  setCost(cost) {
-    this.cost = cost;
-  }
 }
 
 export default SupportPlan;
