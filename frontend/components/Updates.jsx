@@ -1,12 +1,12 @@
 import React from "react";
-import SupportUpdate from './updates/SupportUpdateContainer';
+import PlanUpdate from './updates/PlanUpdate';
 
 const Updates = () => {
 
   return (
   <div className="update">
     <div className="update-title">Update Subscriptions</div>
-    <SupportUpdate product={"Support"} />
+    <PlanUpdate product={"Support"} />
   </div>
   )
 };

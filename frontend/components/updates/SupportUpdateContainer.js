@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from "react-router";
-import SupportUpdate from './SupportUpdate';
+import SupportUpdate from './PlanUpdate';
 import { fetchCurrentPlan, fetchAvailablePlans, updateCurrentPlan } from '../../actions/support_actions';
 import { fetchPlanPricing } from '../../utils/support_api_util';
 
