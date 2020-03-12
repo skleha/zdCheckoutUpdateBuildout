@@ -1,5 +1,5 @@
 import React from "react";
-import PlanUpdate from './updates/PlanUpdate';
+import PlanUpdate from './PlanUpdate';
 
 const Updates = () => {
 

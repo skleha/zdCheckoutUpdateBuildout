@@ -1,7 +1,7 @@
 import React from "react";
-import * as supportHelper from '../../helpers/supportHelpers';
-import SupportPlan from "../../models/SupportPlan";
-import * as SupportAPIUtil from "../../utils/support_api_util";
+import * as supportHelper from '../helpers/supportHelpers';
+import SupportPlan from "../models/SupportPlan";
+import * as SupportAPIUtil from "../utils/support_api_util";
 
 
 class SupportUpdate extends React.Component {
