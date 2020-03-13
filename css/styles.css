@@ -3,6 +3,7 @@
 
 .update {
   padding: 20px;
+  width: 540px;
 }
 
 .update-title {
@@ -20,6 +21,24 @@
   width: 500px;
   margin-bottom: 12px;
 }
+
+.update-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.link {
+  font-size: 14px;
+  background-color: #164D4C;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+
 
 .update-product {
   height: 60px;
