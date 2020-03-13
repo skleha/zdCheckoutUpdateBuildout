@@ -9,9 +9,14 @@ function PaymentUpdate(props) {
 
   return (
     <div className="payment-update">
-      <input type="text" />
-      <input type="text" />
-      <input type="text" />
+      <div className="payments-title">Update Payment Information</div>
+      
+      <div className="payment-inputs-div">
+        <input className="payment-input" id="credit-card-no" type="text" />
+        <input className="payment-input" id="credit-card-exp" type="text" />
+        <input className="payment-input" id="credit-card-cvv" type="text" />
+      </div>
+
     </div>
   )
 

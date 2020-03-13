@@ -147,3 +147,27 @@ button:disabled {
   margin-left: auto;
   margin-right: 0;
 }
+
+
+/* PAYMENT DETAILS COMPONENT */
+
+.payment-update {
+  padding: 20px;
+  width: 540px;
+}
+
+.payments-title {
+  margin-bottom: 15px;
+}
+
+
+.payment-inputs-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50px;
+}
+
+.payment-input {
+  margin-bottom: 12px;
+}
