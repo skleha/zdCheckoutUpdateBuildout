@@ -140,3 +140,15 @@ export const updateCurrentPlan = async (product, settings) => {
 
   }
 }
+
+
+//=======================
+
+
+export const fetchPaymentInfo = async () => {
+  return await $.ajax({
+    url: "/api/payment",
+    type: "GET",
+  });
+
+}

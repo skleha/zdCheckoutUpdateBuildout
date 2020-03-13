@@ -178,3 +178,17 @@ $.mockjax({
 
 
 //------------------------------------------------
+
+let currPaymentInfo = { 
+  number: "1234567890123456",
+  exp: "5/23",
+  cvv: "813"
+}
+
+$.mockjax({
+  url: "/api/crm/plans",
+  type: "GET",
+  response: function() {
+    this.responseText = currPaymentInfo;
+  }
+});

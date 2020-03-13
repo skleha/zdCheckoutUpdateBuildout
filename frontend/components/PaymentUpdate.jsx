@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 
 
 function PaymentUpdate(props) {
@@ -7,11 +7,12 @@ function PaymentUpdate(props) {
   const [{number, exp, cvv}, setPaymentInfo] = useState({number: 1234, exp: "12/23", cvv: "813"});
 
 
+  useEffect( async () => {
+    const paymentInfo = await SubscriptionAPIUtil.fetchPaymentInfo();
+    setPaymentInfo(paymentInfo);
+  })
+
   
-
-
-
-
   return (
     <div className="payment-update">
       <div className="payments-title">Update Payment Information</div>
