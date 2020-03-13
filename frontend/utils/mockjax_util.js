@@ -22,13 +22,23 @@ let currSubscription = {
   cost: 50
 };
 
+// $.mockjax({
+//   url: "/api/current",
+//   type: "GET",
+//   response: function() {
+//     this.responseText = currSubscription;
+//   }
+// });
+
+
+// Mock error message
 $.mockjax({
   url: "/api/current",
   type: "GET",
-  response: function() {
-    this.responseText = currSubscription;
-  }
+  status: 500,
+  responseText: "Server unable"
 });
+
 
 $.mockjax({
   url: "/api/previous",
