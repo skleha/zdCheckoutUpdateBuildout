@@ -40,7 +40,7 @@ $.mockjax({
 
 $.mockjax({
   url: "/api/previous",
-  type: "GET",
+  type: "DELETE",
   response: function () {
     const deletedSub = prevSubscription;
     prevSubscription = "";

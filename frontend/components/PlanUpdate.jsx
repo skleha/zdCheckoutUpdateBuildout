@@ -26,6 +26,7 @@ class PlanUpdate extends React.Component {
     const plansAndNames = await SubscriptionAPIUtil.fetchAvailablePlans(
       this.props.product
     );
+    SubscriptionAPIUtil.deletePreviousPlan(this.props.product);
     const { plan, name, seats, cost } = currentPlan;
     
     this.setState({
