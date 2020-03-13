@@ -22,9 +22,6 @@ export const fetchCurrentPlan = async (product) => {
 }
 
 
-
-
-
 export const fetchPreviousPlan = async (product) => {
   
   switch (product) {
@@ -71,7 +68,6 @@ export const deletePreviousPlan = async (product) => {
 }
 
 
-
 export const fetchAvailablePlans = async (product) => {
 
   switch (product) {
@@ -94,6 +90,7 @@ export const fetchAvailablePlans = async (product) => {
   }
 
 }
+
 
 export const fetchPlanPricing = async (product, plan, seats) => {
   
@@ -118,6 +115,7 @@ export const fetchPlanPricing = async (product, plan, seats) => {
 
   }
 }
+
 
 export const updateCurrentPlan = async (product, settings) => {
   
