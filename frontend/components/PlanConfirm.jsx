@@ -2,6 +2,8 @@ import React from "react";
 import classNames from 'classnames'
 import * as helperFuncs from "../helpers/helperFuncs";
 import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
+import { withRouter } from "react-router";
+
 
 class PlanConfirm extends React.Component {
   constructor(props) {
@@ -77,4 +79,4 @@ class PlanConfirm extends React.Component {
   }
 }
 
-export default PlanConfirm;
+export default withRouter(PlanConfirm);

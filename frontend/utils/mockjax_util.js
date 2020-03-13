@@ -39,6 +39,16 @@ $.mockjax({
 });
 
 $.mockjax({
+  url: "/api/previous",
+  type: "GET",
+  response: function () {
+    const deletedSub = prevSubscription;
+    prevSubscription = "";
+    this.responseText = deletedSub;
+  }
+});
+
+$.mockjax({
   url: "/api/support/plans",
   type: "GET",
   responseText: PLAN_NAMES
@@ -110,6 +120,16 @@ $.mockjax({
   type: "GET",
   response: function() {
     this.responseText = crmPrevSubscription;
+  }
+});
+
+$.mockjax({
+  url: "/api/crm/previous",
+  type: "DELETE",
+  response: function () {
+    const deletedSub = crmPrevSubscription;
+    crmPrevSubscription = "";
+    this.responseText = deletedSub;
   }
 });
 

@@ -21,6 +21,10 @@ export const fetchCurrentPlan = async (product) => {
   }
 }
 
+
+
+
+
 export const fetchPreviousPlan = async (product) => {
   
   switch (product) {
@@ -42,6 +46,31 @@ export const fetchPreviousPlan = async (product) => {
 
   }
 }
+
+
+export const deletePreviousPlan = async (product) => {
+
+  switch (product) {
+
+    case "Support":
+      return await $.ajax({
+        url: "/api/previous",
+        type: "DELETE"
+      })
+
+    case "CRM":
+      return await $.ajax({
+        url: "/api/crm/previous",
+        type: "DELETE"
+      });
+
+    default:
+      throw new Error('Invalid product type');
+
+  }
+}
+
+
 
 export const fetchAvailablePlans = async (product) => {
 
