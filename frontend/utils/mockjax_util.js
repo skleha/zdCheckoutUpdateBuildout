@@ -186,7 +186,7 @@ let currPaymentInfo = {
 }
 
 $.mockjax({
-  url: "/api/crm/plans",
+  url: "/api/payment",
   type: "GET",
   response: function() {
     this.responseText = currPaymentInfo;
