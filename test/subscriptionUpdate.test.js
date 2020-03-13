@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import * as SubscriptionHelpers from '../frontend/helpers/supportHelpers';
+import * as helperFuncs from '../frontend/helpers/helperFuncs';
 import { cleanup, fireEvent, render, wait, getByPlaceholderText, getByTestId, waitForDomChange } from '@testing-library/react';
 import SupportPlan from '../frontend/models/SupportPlan';
 import SupportUpdate from '../frontend/components/updates/SupportUpdate';

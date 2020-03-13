@@ -1,5 +1,5 @@
 import React from "react";
-import * as supportHelper from '../helpers/supportHelpers';
+import * as helperFuncs from '../helpers/helperFuncs';
 import Subscription from "../models/Subscription";
 import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 import { withRouter } from "react-router";
@@ -69,7 +69,7 @@ class PlanUpdate extends React.Component {
     const {
       hasPlanChanged,
       hasSeatsChanged
-    } = supportHelper.hasSubscriptionChanged(selectedPlan, currentPlan);
+    } = helperFuncs.hasSubscriptionChanged(selectedPlan, currentPlan);
 
     this.setState({
       selectedPlan,

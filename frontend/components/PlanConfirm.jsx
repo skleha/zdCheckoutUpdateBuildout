@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from 'classnames'
-import * as supportHelper from "../helpers/supportHelpers";
+import * as helperFuncs from "../helpers/helperFuncs";
 import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 
 class PlanConfirm extends React.Component {
@@ -36,7 +36,7 @@ class PlanConfirm extends React.Component {
       hasPlanChanged,
       hasSeatsChanged,
       hasCostChanged
-    } = supportHelper.hasSubscriptionChanged(previous, updated);
+    } = helperFuncs.hasSubscriptionChanged(previous, updated);
     
     const planChangeClassName = classNames("confirm-grid-data", {
       changed: hasPlanChanged
