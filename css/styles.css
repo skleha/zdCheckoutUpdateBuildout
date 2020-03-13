@@ -157,7 +157,7 @@ button:disabled {
 }
 
 .payments-title {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 
@@ -165,9 +165,16 @@ button:disabled {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 50px;
+  width: 200px;
+}
+
+.payment-label {
+  font-size: 13px;
+  margin-bottom: 5px;
 }
 
 .payment-input {
   margin-bottom: 12px;
+  height: 22px;
 }
+
