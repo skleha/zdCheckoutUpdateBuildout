@@ -29,8 +29,8 @@ class PlanConfirm extends React.Component {
 
   render() {
     if (this.state.isLoading) return "Loading...";
-    const previous = this.props.previousPlan;
-    const updated = this.props.currentPlan;
+    const previous = this.state.previousPlan;
+    const updated = this.state.currentPlan;
     
     const {
       hasPlanChanged,

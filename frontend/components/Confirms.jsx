@@ -7,10 +7,10 @@ const Confirms = () => {
     <div className="confirm">
       <div className="confirm-title">Plan Change Confirmation</div>
       <PlanConfirm product={"Support"}/>
+      <PlanConfirm product={"CRM"} />
     </div>
   );
 
 }
-
 
 export default Confirms;

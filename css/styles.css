@@ -92,6 +92,7 @@ button:disabled {
   background-color: lightgrey;
   border-radius: 5px;
   width: 500px;
+  margin-bottom: 12px;
 }
 
 .confirm-component-title {
