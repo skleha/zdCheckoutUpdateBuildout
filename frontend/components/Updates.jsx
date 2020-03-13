@@ -3,6 +3,7 @@ import PlanUpdate from './PlanUpdate';
 
 const Updates = () => {
 
+
   return (
     <div className="update">
       <div className="update-title">Update Subscriptions</div>

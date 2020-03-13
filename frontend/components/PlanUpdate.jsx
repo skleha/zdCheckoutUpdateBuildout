@@ -60,8 +60,10 @@ class PlanUpdate extends React.Component {
 
 
   async handleSubscriptionChange(plan, planName, seats) {
-  
-    const { cost } = await SubscriptionAPIUtil.fetchPlanPricing(this.props.product, plan, seats);
+    const convertedSeatNum = Number(seats);
+    const validSeatNum = (Number.isInteger(convertedSeatNum) && convertedSeatNum > 0) ? true : false;
+
+    const { cost } = validSeatNum ? await SubscriptionAPIUtil.fetchPlanPricing(this.props.product, plan, seats) : { cost: 0 }
     const selectedPlan = new Subscription(plan, planName, seats, cost);
     const currentPlan = this.state.currentPlan;
 
