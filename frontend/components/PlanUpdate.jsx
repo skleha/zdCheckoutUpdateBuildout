@@ -1,11 +1,11 @@
 import React from "react";
 import * as supportHelper from '../helpers/supportHelpers';
-import SupportPlan from "../models/SupportPlan";
-import * as PlanAPIUtil from "../utils/plan_api_util";
+import Subscription from "../models/Subscription";
+import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 import { withRouter } from "react-router";
 
 
-class SupportUpdate extends React.Component {
+class PlanUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,15 +22,15 @@ class SupportUpdate extends React.Component {
   }
 
   async componentDidMount() {
-    const currentPlan = await PlanAPIUtil.fetchCurrentPlan(this.props.product);
-    const plansAndNames = await PlanAPIUtil.fetchAvailablePlans(
+    const currentPlan = await SubscriptionAPIUtil.fetchCurrentPlan(this.props.product);
+    const plansAndNames = await SubscriptionAPIUtil.fetchAvailablePlans(
       this.props.product
     );
     const { plan, name, seats, cost } = currentPlan;
     
     this.setState({
-      currentPlan: new SupportPlan(plan, name, seats, cost),
-      selectedPlan: new SupportPlan(plan, name, seats, cost),
+      currentPlan: new Subscription(plan, name, seats, cost),
+      selectedPlan: new Subscription(plan, name, seats, cost),
       plansAndNames,
       isLoading: false,
       });
@@ -62,8 +62,8 @@ class SupportUpdate extends React.Component {
 
   async handleSubscriptionChange(plan, planName, seats) {
   
-    const { cost } = await PlanAPIUtil.fetchPlanPricing(this.props.product, plan, seats);
-    const selectedPlan = new SupportPlan(plan, planName, seats, cost);
+    const { cost } = await SubscriptionAPIUtil.fetchPlanPricing(this.props.product, plan, seats);
+    const selectedPlan = new Subscription(plan, planName, seats, cost);
     const currentPlan = this.state.currentPlan;
 
     const {
@@ -80,7 +80,7 @@ class SupportUpdate extends React.Component {
 
 
   async handleUpdatePlanClick(e) {
-    await PlanAPIUtil.updateCurrentPlan(this.props.product, this.state.selectedPlan);
+    await SubscriptionAPIUtil.updateCurrentPlan(this.props.product, this.state.selectedPlan);
     this.props.history.push("/confirm");
   }
 
@@ -135,4 +135,4 @@ class SupportUpdate extends React.Component {
   }
 }
 
-export default withRouter(SupportUpdate);
+export default withRouter(PlanUpdate);

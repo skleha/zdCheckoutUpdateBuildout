@@ -1,5 +1,5 @@
-import * as SupportAPIUtil from '../utils/support_api_util';
-import SupportPlan from '../models/SupportPlan';
+import * as SubscriptionAPIUtil from '../utils/subscription_api_util';
+import Subscription from '../models/Subscription';
 export const RECEIVE_CURRENT_PLAN = "RECEIVE_CURRENT_PLAN";
 export const RECEIVE_AVAILABLE_PLANS = "RECEIVE_AVAILABLE_PLANS";
 export const RECEIVE_PREVIOUS_PLAN = "RECEIVE_PREVIOUS_PLAN";
@@ -8,7 +8,7 @@ export const RECEIVE_PREVIOUS_PLAN = "RECEIVE_PREVIOUS_PLAN";
 
 const receiveCurrentPlan = currentPlan => {
   const { plan, name, seats, cost } = currentPlan;
-  const currPlan = new SupportPlan(plan, name, seats, cost);
+  const currPlan = new Subscription(plan, name, seats, cost);
 
   return ({
     type: RECEIVE_CURRENT_PLAN,
@@ -18,7 +18,7 @@ const receiveCurrentPlan = currentPlan => {
 
 const receivePreviousPlan = previousPlan => {
   const { plan, name, seats, cost } = previousPlan;
-  const prevPlan = new SupportPlan(plan, name, seats, cost);
+  const prevPlan = new Subscription(plan, name, seats, cost);
 
   return {
     type: RECEIVE_PREVIOUS_PLAN,
@@ -36,21 +36,21 @@ const receiveAvailPlans = availablePlans => {
 
 
 export const fetchCurrentPlan = (product) => dispatch => (
-  SupportAPIUtil.fetchCurrentPlan()
+  SubscriptionAPIUtil.fetchCurrentPlan()
     .then(plan => dispatch(receiveCurrentPlan(plan)))
 );
 
 export const fetchPreviousPlan = (product) => dispatch => (
-  SupportAPIUtil.fetchPreviousPlan()
+  SubscriptionAPIUtil.fetchPreviousPlan()
     .then(plan => dispatch(receivePreviousPlan(plan)))
 )
 
 export const fetchAvailablePlans = (product) => dispatch => (
-  SupportAPIUtil.fetchAvailablePlans()
+  SubscriptionAPIUtil.fetchAvailablePlans()
     .then(plans => dispatch(receiveAvailPlans(plans)))
 );
 
 export const updateCurrentPlan = (product, plan) => dispatch => (
-  SupportAPIUtil.updateCurrentPlan(product, plan)
+  SubscriptionAPIUtil.updateCurrentPlan(product, plan)
     .then(plan => dispatch(receiveCurrentPlan(plan)))
 );

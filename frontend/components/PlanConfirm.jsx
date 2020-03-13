@@ -1,19 +1,26 @@
 import React from "react";
 import classNames from 'classnames'
 import * as supportHelper from "../helpers/supportHelpers";
-import * as PlanAPIUtil from "../utils/plan_api_util";
+import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 
 class PlanConfirm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isLoading: true}
+    this.state = { 
+      currentPlan: "",
+      previousPlan: "",
+      isLoading: true}
 
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   async componentDidMount() {
-    await this.props.fetchPreviousPlan();
-    this.setState({ isLoading: false});
+    const currentPlan = await SubscriptionAPIUtil.fetchCurrentPlan(this.props.product);
+    const previousPlan = await SubscriptionAPIUtil.fetchPreviousPlan(this.props.product);
+    this.setState({ 
+      currentPlan,
+      previousPlan,
+      isLoading: false});
   }
 
   handleBackClick(e) {
@@ -45,7 +52,7 @@ class PlanConfirm extends React.Component {
       <div className="confirm-component">
         <div className="confirm-title"></div>
         <div className="confirm-grid-container">
-          <div className="confirm-grid-title">Support Plan</div>
+          <div className="confirm-grid-title">{`${this.props.product} Plan`}</div>
           <div className="confirm-grid-header">Previous Subscription</div>
           <div className="confirm-grid-header">Updated Subscription</div>
           <div className="confirm-grid-title">Plan Name</div>

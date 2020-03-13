@@ -1,6 +1,3 @@
-import * as core from "core-js/stable";
-import * as regen from "regenerator-runtime";
-
 
 export const fetchCurrentPlan = async (product) => {
    

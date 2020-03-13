@@ -6,7 +6,7 @@ import {  fetchCurrentPlan,
           fetchPreviousPlan, 
           fetchAvailablePlans, 
           fetchPlanPricing, 
-          updateCurrentPlan } from "./utils/support_api_util";
+          updateCurrentPlan } from "./utils/subscription_api_util";
 
 document.addEventListener("DOMContentLoaded", () => {
   

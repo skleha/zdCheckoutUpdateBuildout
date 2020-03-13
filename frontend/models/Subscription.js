@@ -1,5 +1,5 @@
 
-class SupportPlan {
+class Subscription {
 
   constructor(plan, name, seats, cost) {
     this.plan = plan;
@@ -7,7 +7,6 @@ class SupportPlan {
     this.seats = seats;
     this.cost = cost;
   }
-
 }
 
-export default SupportPlan;
+export default Subscription;
