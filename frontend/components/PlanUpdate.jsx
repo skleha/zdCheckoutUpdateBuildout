@@ -13,7 +13,8 @@ class PlanUpdate extends React.Component {
       selectedPlan: "",
       plansAndNames: "",
       isLoading: true,
-      updateButtonEnabled: false
+      updateButtonEnabled: false,
+      error: false
     }
 
     this.handlePlanChange = this.handlePlanChange.bind(this);
@@ -22,17 +23,29 @@ class PlanUpdate extends React.Component {
   }
 
   async componentDidMount() {
-    const currentPlan = await SubscriptionAPIUtil.fetchCurrentPlan(this.props.product);
-    const plansAndNames = await SubscriptionAPIUtil.fetchAvailablePlans(this.props.product);
-    SubscriptionAPIUtil.deletePreviousPlan(this.props.product);
-    const { plan, name, seats, cost } = currentPlan;
     
-    this.setState({
-      currentPlan: new Subscription(plan, name, seats, cost),
-      selectedPlan: new Subscription(plan, name, seats, cost),
-      plansAndNames,
-      isLoading: false,
+    try {
+      const currentPlan = await SubscriptionAPIUtil.fetchCurrentPlan(this.props.product);
+      const plansAndNames = await SubscriptionAPIUtil.fetchAvailablePlans(this.props.product);
+      SubscriptionAPIUtil.deletePreviousPlan(this.props.product);
+
+      const { plan, name, seats, cost } = currentPlan;
+
+      this.setState({
+        currentPlan: new Subscription(plan, name, seats, cost),
+        selectedPlan: new Subscription(plan, name, seats, cost),
+        plansAndNames,
+        isLoading: false,
       });
+
+    }
+    catch(error) {
+      this.setState({ 
+        isLoading: false,
+        error: true
+      });
+    }   
+    
   }
 
 
@@ -88,6 +101,7 @@ class PlanUpdate extends React.Component {
 
   render() {
     if (this.state.isLoading) return null;
+    if (this.state.error) return "Plan Data Not Available";
     const plans = Object.keys(this.state.plansAndNames);
 
 
