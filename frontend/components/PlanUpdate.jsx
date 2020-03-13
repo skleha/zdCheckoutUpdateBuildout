@@ -87,7 +87,7 @@ class PlanUpdate extends React.Component {
 
 
   render() {
-    if (this.state.isLoading) return "Loading...";
+    if (this.state.isLoading) return null;
     const plans = Object.keys(this.state.plansAndNames);
 
 
