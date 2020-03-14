@@ -22,6 +22,7 @@ class PlanUpdate extends React.Component {
     this.handleUpdatePlanClick = this.handleUpdatePlanClick.bind(this);
   }
 
+  // HANDLES ERROR FROM BACKEND IN TRY CATCH
   async componentDidMount() {
     
     try {
