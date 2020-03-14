@@ -7,13 +7,21 @@ const Updates = () => {
 
   // populate state
 
-  const 
 
-  // handleSeatChange
   // handlePlanChange
   // handleSubscriptionChange
   // handleUpdatePlan
   // 
+
+  const handleSeatChange = e => {
+    const seats = e.target.value
+
+    handleSubscriptionChange(
+      this.state.selectedPlan.plan,
+      this.state.selectedPlan.name,
+      seats
+    )
+  }
 
   
 
