@@ -192,3 +192,20 @@ $.mockjax({
     this.responseText = currPaymentInfo;
   }
 });
+
+
+$.mockjax({
+  url: "/api/payment",
+  type: "PUT",
+  response: function (request) {
+    let newData = {
+      number: request.data.paymentInfo.number,
+      exp: request.data.paymentInfo.exp,
+      cvv: request.data.paymentInfo.cvv
+    }
+
+    console.log(JSON.stringify(currPaymentInfo));
+    currPaymentInfo = newData;
+    this.responseText = currPaymentInfo;
+  }
+});

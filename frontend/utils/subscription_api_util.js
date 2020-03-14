@@ -150,5 +150,12 @@ export const fetchPaymentInfo = async () => {
     url: "/api/payment",
     type: "GET",
   });
+}
 
+export const updatePaymentInfo = async (paymentInfo) => {
+  return await $.ajax({
+    url: "/api/payment",
+    type: "PUT",
+    data: {paymentInfo}
+  });
 }
