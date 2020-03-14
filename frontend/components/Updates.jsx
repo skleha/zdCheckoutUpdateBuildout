@@ -24,6 +24,18 @@ const Updates = () => {
   }
 
   
+  const handlePlanChange = ({ productType, selectedPlan }) => {
+    const product = { ...productSubscriptions[productType] }
+    const selectedName = plansAndNames[selectedPlan]
+
+    handleSubscriptionChange({
+      productType,
+      plan: selectedPlan,
+      planName: selectedName,
+      seats: product.seats,
+    })
+  }
+  
 
 
 
