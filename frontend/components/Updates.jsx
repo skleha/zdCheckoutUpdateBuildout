@@ -1,55 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PlanUpdate from './PlanUpdate';
 import { Link } from 'react-router-dom';
+import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 
 
 const Updates = () => {
 
-  // populate state
+  const [currSupportSub, setCurrSupportSub] = useState({});
+  const [supportPlans, setSupportPlans] = useState({});
+  const [currCrmSub, setCurrCrmSub] = useState({});
+  const [crmPlans, setCrmPlans] = useState({});
 
-  
-  const handleSeatChange = e => {
-    const seats = e.target.value
 
-    handleSubscriptionChange(
-      product,
-      plan,
-      name,
-      seats
-    )
-  }
-
-  
-  const handlePlanChange = (product, selectedPlan) => {
-    const selectedName = plansAndNames[selectedPlan];
-
-    handleSubscriptionChange({
-      productType,
-      plan: selectedPlan,
-      planName: selectedName,
-      seats: product.seats,
-    })
-  }
-  
-  const handleSubscriptionChange = async (product, plan, planName, seats) => {
+  useEffect( () => {
+    const fetchAllData = async () => {
     
-    const cost = await fetchProductPricing(product, plan, seats);
-    const selectedPlan = new Subscription(plan, planName, seats, cost);
-    const currentPlan = this.props.currentPlan;
+      const apiResponse = await Promise.all([
+        SubscriptionAPIUtil.fetchCurrentPlan('Support'),
+        SubscriptionAPIUtil.fetchAvailablePlans('Support'),
+        SubscriptionAPIUtil.fetchCurrentPlan('CRM'),
+        SubscriptionAPIUtil.fetchAvailablePlans('CRM')
+      ])
 
-    const {
-      hasPlanChanged,
-      hasSeatsChanged,
-    } = crmHelper.hasSubscriptionChanged(selectedPlan, currentPlan)
+      const [currSupportSub, supportPlans, currCrmSub, crmPlans] = apiResponse;
+      setCurrSupportSub(currSupportSub);
+      setSupportPlans(supportPlans);
+      setCurrCrmSub(currCrmSub);
+      setCrmPlans(crmPlans);
+    }
 
-  }
+    fetchAllData();
 
-  const handleUpdatePlanClick = async e => {
-    await this.props.updateCurrentCrmPlan(this.state.selectedPlan)
-    this.props.history.push('/confirm')
-  }
-
-
+  }, []);
 
 
   return (
@@ -60,8 +42,16 @@ const Updates = () => {
         <Link className="link" to="/payment">Update Payment Detail</Link>
       </div>
       
-      <PlanUpdate product={"Support"} />
-      <PlanUpdate product={"CRM"} />
+      <PlanUpdate
+        product={"Support"} 
+        currentSub={currSupportSub}
+        plansAndNames={supportPlans}
+        />
+      <PlanUpdate
+        product={"CRM"}
+        currentSub={currCrmSub}
+        plansAndNames={crmPlans}
+       />
     </div>
   );
 };

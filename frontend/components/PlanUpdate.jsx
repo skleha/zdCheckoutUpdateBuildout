@@ -9,9 +9,7 @@ class PlanUpdate extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPlan: "",
       selectedPlan: "",
-      plansAndNames: "",
       isLoading: true,
       updateButtonEnabled: false,
       error: false
@@ -22,31 +20,13 @@ class PlanUpdate extends React.Component {
     this.handleUpdatePlanClick = this.handleUpdatePlanClick.bind(this);
   }
 
-  // HANDLES ERROR FROM BACKEND IN TRY CATCH
+  
   async componentDidMount() {
-    
-    try {
-      const currentPlan = await SubscriptionAPIUtil.fetchCurrentPlan(this.props.product);
-      const plansAndNames = await SubscriptionAPIUtil.fetchAvailablePlans(this.props.product);
-      SubscriptionAPIUtil.deletePreviousPlan(this.props.product);
-
-      const { plan, name, seats, cost } = currentPlan;
-
+      const { plan, name, seats, cost } = this.props.currentPlan;
       this.setState({
-        currentPlan: new Subscription(plan, name, seats, cost),
         selectedPlan: new Subscription(plan, name, seats, cost),
-        plansAndNames,
         isLoading: false,
-      });
-
-    }
-    catch(error) {
-      this.setState({ 
-        isLoading: false,
-        error: true
-      });
-    }   
-    
+      });    
   }
 
 
