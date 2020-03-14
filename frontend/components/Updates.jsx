@@ -7,12 +7,6 @@ const Updates = () => {
 
   // populate state
 
-
-  // handlePlanChange
-  // handleSubscriptionChange
-  // handleUpdatePlan
-  // 
-
   const handleSeatChange = e => {
     const seats = e.target.value
 
@@ -43,10 +37,10 @@ const Updates = () => {
     seats,
   }) => {
     const cost = await fetchProductPricing({ productType, plan, seats })
-    const selectedPlan = new CrmPlan(plan, planName, seats, cost) // TODO: use generalized plan class b/c your current plans have same structure
+    const selectedPlan = new Subscription(plan, planName, seats, cost) // TODO: use generalized plan class b/c your current plans have same structure
 
     const currentPlan = productSubscriptions[productType]
-    const currentPlanModel = new CrmPlan(
+    const currentPlanModel = new Subscription(
       currentPlan.plan,
       currentPlan.planName,
       currentPlan.seats,
@@ -58,10 +52,27 @@ const Updates = () => {
       hasSeatsChanged,
     } = crmHelper.hasSubscriptionChanged(selectedPlan, currentPlanModel)
 
-    alert(
-      `The selected plan name is ${selectedPlan.name} and cost is ${selectedPlan.cost}. The previous plan is ${currentPlanModel.name} and the cost was ${currentPlanModel.cost}. haschanged is ${hasPlanChanged} and hasSeatsChanged is ${hasSeatsChanged}`
-    )
   }
+
+  const handleUpdatePlanClick = async e => {
+    await this.props.updateCurrentCrmPlan(this.state.selectedPlan)
+    this.props.history.push('/confirm')
+  }
+
+
+  const handlePlanChange = ({ productType, selectedPlan }) => {
+    const product = { ...productSubscriptions[productType] }
+    const selectedName = plansAndNames[selectedPlan]
+
+    handleSubscriptionChange({
+      productType,
+      plan: selectedPlan,
+      planName: selectedName,
+      seats: product.seats,
+    })
+  }
+
+
 
 
   return (
