@@ -7,6 +7,7 @@ const Updates = () => {
 
   // populate state
 
+  
   const handleSeatChange = e => {
     const seats = e.target.value
 
@@ -46,19 +47,6 @@ const Updates = () => {
   const handleUpdatePlanClick = async e => {
     await this.props.updateCurrentCrmPlan(this.state.selectedPlan)
     this.props.history.push('/confirm')
-  }
-
-
-  const handlePlanChange = ({ productType, selectedPlan }) => {
-    const product = { ...productSubscriptions[productType] }
-    const selectedName = plansAndNames[selectedPlan]
-
-    handleSubscriptionChange({
-      productType,
-      plan: selectedPlan,
-      planName: selectedName,
-      seats: product.seats,
-    })
   }
 
 
