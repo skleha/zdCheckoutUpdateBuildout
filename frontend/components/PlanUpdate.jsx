@@ -32,7 +32,7 @@ class PlanUpdate extends React.Component {
 
   handlePlanChange(e) {
     const selectedPlan = e.target.value;
-    const selectedName = this.state.plansAndNames[selectedPlan];
+    const selectedName = this.props.plansAndNames[selectedPlan];
   
     this.handleSubscriptionChange(
       selectedPlan,
