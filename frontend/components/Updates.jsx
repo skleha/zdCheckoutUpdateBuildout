@@ -5,6 +5,21 @@ import { Link } from 'react-router-dom';
 
 const Updates = () => {
 
+  // populate state
+
+  const 
+
+  // handleSeatChange
+  // handlePlanChange
+  // handleSubscriptionChange
+  // handleUpdatePlan
+  // 
+
+  
+
+
+
+
 
   return (
     <div className="update">
