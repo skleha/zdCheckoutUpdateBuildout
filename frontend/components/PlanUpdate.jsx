@@ -74,6 +74,8 @@ class PlanUpdate extends React.Component {
 
 
   async handleSubscriptionChange(plan, planName, seats) {
+    
+    // HANDLE INVALID SEAT COUNT
     const convertedSeatNum = Number(seats);
     const validSeatNum = (Number.isInteger(convertedSeatNum) && convertedSeatNum > 0) ? true : false;
 
