@@ -1,3 +1,5 @@
+
+
 export const validateSeatNum = seats => {
   const typeConvertedSeats = Number(seats);
   return Number.isInteger(typeConvertedSeats) && typeConvertedSeats > 0;
@@ -9,4 +11,3 @@ export const hasSubscriptionChanged = (selectedSub, currentSub) => {
   const hasCostChanged = selectedSub.cost !== currentSub.cost;
   return { hasPlanChanged, hasSeatsChanged, hasCostChanged }
 };
-

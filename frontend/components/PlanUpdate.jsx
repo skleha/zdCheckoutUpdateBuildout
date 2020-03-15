@@ -1,93 +1,86 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as helperFuncs from '../helpers/helperFuncs';
 import Subscription from "../models/Subscription";
 import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 import { withRouter } from "react-router";
 
 
-class PlanUpdate extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedSub: "",
-      isLoading: true,
-      updateButtonEnabled: false,
-      error: false
-    }
-
-    this.handlePlanChange = this.handlePlanChange.bind(this);
-    this.handleSeatChange = this.handleSeatChange.bind(this);
-    this.handleUpdatePlanClick = this.handleUpdatePlanClick.bind(this);
-  }
-
+function PlanUpdate(props) {
   
-  componentDidMount() {
-      const { plan, name, seats, cost } = this.props.currentSub;
-      
-      this.setState({
-        selectedSub: new Subscription(plan, name, seats, cost),
-        isLoading: false,
-      });    
-  }
+  const [selectedSub, setSelectedSub] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
+  const [errors, setErrors] = useState(false);
 
 
-  handlePlanChange(e) {
-    const selectedSub = e.target.value;
-    const selectedName = this.props.plansAndNames[selectedSub];
-  
-    this.handleSubscriptionChange(
-      selectedSub,
+  useEffect(() => {
+    const { plan, name, seats, cost } = props.currentSub;
+    const newSub = new Subscription(plan, name, seats, cost);
+    setSelectedSub(newSub);
+    setIsLoading(false);
+  }, []);
+
+
+  const handlePlanChange = (e) => {
+    const selectedPlan = e.target.value;
+    const selectedName = props.plansAndNames[selectedPlan];
+
+    handleSubscriptionChange(
+      selectedPlan,
       selectedName,
-      this.state.selectedSub.seats
+      selectedSub.seats
     );
-  }
+  };
 
 
-  handleSeatChange(e) {
+  const handleSeatChange = (e) => {
     const seats = e.target.value;
 
-    this.handleSubscriptionChange(
-      this.state.selectedSub.plan,
-      this.state.selectedSub.name,
+    handleSubscriptionChange(
+      selectedSub.plan,
+      selectedSub.name,
       seats
     );
-  }
+  };
 
 
-  async handleSubscriptionChange(plan, planName, seats) {
-    
+  const handleSubscriptionChange = async (plan, planName, seats) => {
     const validSeatNum = helperFuncs.validateSeatNum(seats);
-    const { cost } = validSeatNum ? await SubscriptionAPIUtil.fetchPlanPricing(this.props.product, plan, seats) : { cost: 0 }
-    const selectedSub = new Subscription(plan, planName, seats, cost);
+    const { cost } = validSeatNum ? await SubscriptionAPIUtil.fetchPlanPricing(props.product, plan, seats) : { cost: 0 }
+    const newSub = new Subscription(plan, planName, seats, cost);
 
     const {
       hasPlanChanged,
       hasSeatsChanged
-    } = helperFuncs.hasSubscriptionChanged(selectedSub, this.props.currentSub);
+    } = helperFuncs.hasSubscriptionChanged(newSub, props.currentSub);
+    
+    console.log(newSub);
+    setSelectedSub(newSub);
+    setUpdateButtonEnabled((hasPlanChanged || hasSeatsChanged) && validSeatNum);
+  };
 
-    this.setState({
-      selectedSub,
-      updateButtonEnabled: (hasPlanChanged || hasSeatsChanged) && validSeatNum
-    });
+
+  const handleUpdatePlanClick = async (e) => {
+    await SubscriptionAPIUtil.updateCurrentSub(props.product, selectedSub);
+    props.history.push("/confirm");
+  };
   
-  }
+  const plans = Object.keys(props.plansAndNames);
 
 
-  async handleUpdatePlanClick(e) {
-    await SubscriptionAPIUtil.updateCurrentSub(this.props.product, this.state.selectedSub);
-    this.props.history.push("/confirm");
-  }
-
-
-  render() {
-    if (this.state.isLoading) return null;
-    if (this.state.error) return "Plan Data Not Available";
-    const plans = Object.keys(this.props.plansAndNames);
-
+  if (isLoading) {
+  
+    return null;
+  
+  } else if (errors) {
+  
+    return "Subscription Data Not Available";
+  
+  } else {
 
     return (
       <div className="update-component">
-        <div className="update-product">{`${this.props.product} Plan`}</div>
+        <div className="update-product">{`${props.product} Plan`}</div>
 
         <div className="update-grid">
           <div className="update-header">Plan</div>
@@ -97,12 +90,12 @@ class PlanUpdate extends React.Component {
           <select
             className="update-select"
             data-testid="plan-select"
-            value={this.state.selectedSub.plan}
-            onChange={this.handlePlanChange}
+            value={selectedSub.plan}
+            onChange={handlePlanChange}
           >
             {plans.map((plan, idx) => (
               <option key={idx} value={plan}>
-                {this.props.plansAndNames[plan]}
+                {props.plansAndNames[plan]}
               </option>
             ))}
           </select>
@@ -111,20 +104,20 @@ class PlanUpdate extends React.Component {
             type="number"
             className="update-input"
             data-testid="seats-select"
-            value={this.state.selectedSub.seats}
-            onChange={this.handleSeatChange}
+            value={selectedSub.seats}
+            onChange={handleSeatChange}
           />
 
-          <div className="update-cost" data-testid="cost">{this.state.selectedSub.cost}</div>
+          <div className="update-cost" data-testid="cost">{selectedSub.cost}</div>
         </div>
 
         <button
           className="update-button"
-          disabled={!this.state.updateButtonEnabled}
-          onClick={this.handleUpdatePlanClick}
-        >
-          Update
+          disabled={!updateButtonEnabled}
+          onClick={handleUpdatePlanClick}>
+            Update
         </button>
+      
       </div>
     );
   }
