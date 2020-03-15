@@ -117,7 +117,7 @@ export const fetchPlanPricing = async (product, plan, seats) => {
 }
 
 
-export const updateCurrentPlan = async (product, settings) => {
+export const updateCurrentSub = async (product, settings) => {
   
   switch (product) {
 
