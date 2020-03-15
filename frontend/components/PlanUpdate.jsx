@@ -22,7 +22,9 @@ class PlanUpdate extends React.Component {
 
   
   async componentDidMount() {
-      const { plan, name, seats, cost } = this.props.currentPlan;
+      console.log(this.props.currentSub);
+      const { plan, name, seats, cost } = this.props.currentSub;
+      
       this.setState({
         selectedPlan: new Subscription(plan, name, seats, cost),
         isLoading: false,
@@ -55,10 +57,7 @@ class PlanUpdate extends React.Component {
 
   async handleSubscriptionChange(plan, planName, seats) {
     
-    // HANDLE INVALID SEAT COUNT
-    const convertedSeatNum = Number(seats);
-    const validSeatNum = (Number.isInteger(convertedSeatNum) && convertedSeatNum > 0) ? true : false;
-
+    const validSeatNum = helperFuncs.validSeatNum(seats);
     const { cost } = validSeatNum ? await SubscriptionAPIUtil.fetchPlanPricing(this.props.product, plan, seats) : { cost: 0 }
     const selectedPlan = new Subscription(plan, planName, seats, cost);
     const currentPlan = this.state.currentPlan;
@@ -70,7 +69,7 @@ class PlanUpdate extends React.Component {
 
     this.setState({
       selectedPlan,
-      updateButtonEnabled: hasPlanChanged || hasSeatsChanged
+      updateButtonEnabled: (hasPlanChanged || hasSeatsChanged) && validSeatNum
     });
   
   }
@@ -85,7 +84,7 @@ class PlanUpdate extends React.Component {
   render() {
     if (this.state.isLoading) return null;
     if (this.state.error) return "Plan Data Not Available";
-    const plans = Object.keys(this.state.plansAndNames);
+    const plans = Object.keys(this.props.plansAndNames);
 
 
     return (
@@ -105,7 +104,7 @@ class PlanUpdate extends React.Component {
           >
             {plans.map((plan, idx) => (
               <option key={idx} value={plan}>
-                {this.state.plansAndNames[plan]}
+                {this.props.plansAndNames[plan]}
               </option>
             ))}
           </select>

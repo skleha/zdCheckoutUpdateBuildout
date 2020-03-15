@@ -10,6 +10,7 @@ const Updates = () => {
   const [supportPlans, setSupportPlans] = useState({});
   const [currCrmSub, setCurrCrmSub] = useState({});
   const [crmPlans, setCrmPlans] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect( () => {
@@ -27,33 +28,42 @@ const Updates = () => {
       setSupportPlans(supportPlans);
       setCurrCrmSub(currCrmSub);
       setCrmPlans(crmPlans);
+      setIsLoading(false);
     }
 
     fetchAllData();
 
   }, []);
 
+  if (isLoading) {
 
-  return (
-    <div className="update">
-      
-      <div className="update-header">
-        <div className="update-title">Update Subscriptions</div>
-        <Link className="link" to="/payment">Update Payment Detail</Link>
-      </div>
-      
-      <PlanUpdate
-        product={"Support"} 
-        currentSub={currSupportSub}
-        plansAndNames={supportPlans}
+    return ("Loading...");
+
+  } else {
+
+    return (
+
+      <div className="update">
+        
+        <div className="update-header">
+          <div className="update-title">Update Subscriptions</div>
+          <Link className="link" to="/payment">Update Payment Detail</Link>
+        </div>
+        
+        <PlanUpdate
+          product={"Support"} 
+          currentSub={currSupportSub}
+          plansAndNames={supportPlans}
+          />
+        <PlanUpdate
+          product={"CRM"}
+          currentSub={currCrmSub}
+          plansAndNames={crmPlans}
         />
-      <PlanUpdate
-        product={"CRM"}
-        currentSub={currCrmSub}
-        plansAndNames={crmPlans}
-       />
-    </div>
-  );
+      </div>
+    );
+  }
+
 };
 
 export default Updates;
