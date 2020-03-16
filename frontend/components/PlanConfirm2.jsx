@@ -10,8 +10,8 @@ function PlanConfirm(props) {
   if (props.previousSub === "") return null;
 
   const handleBackClick = async (e) => {
-    await SubscriptionAPIUtil.deletePreviousPlan();
-    this.props.history.push('/');
+    await SubscriptionAPIUtil.deletePreviousPlan(props.product);
+    props.history.push('/');
   }
 
   const {

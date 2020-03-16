@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import PlanConfirm from './PlanConfirm';
+import * as SubscriptionAPIUtil from '../utils/subscription_api_util';
+import PlanConfirm from './PlanConfirm2';
 
 const Confirms = () => {
 
@@ -15,9 +16,9 @@ const Confirms = () => {
 
       const apiResponse = await Promise.all([
         SubscriptionAPIUtil.fetchCurrentPlan('Support'),
-        Subscription.APIUtil.fetchPreviousPlan('Support'),
+        SubscriptionAPIUtil.fetchPreviousPlan('Support'),
         SubscriptionAPIUtil.fetchCurrentPlan('CRM'),
-        Subscription.APIUtil.fetchPreviousPlan('CRM'),
+        SubscriptionAPIUtil.fetchPreviousPlan('CRM'),
       ])
 
       // Set state with result from API call
