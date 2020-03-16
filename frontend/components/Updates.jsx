@@ -38,6 +38,10 @@ const Updates = () => {
 
   }, []);
 
+  // define update plan here
+  // 
+  
+
   if (isLoading) {
 
     return ("Loading...");

@@ -21,7 +21,6 @@ const Confirms = () => {
         SubscriptionAPIUtil.fetchPreviousPlan('CRM'),
       ])
 
-      // Set state with result from API call
       const [currSupport, prevSupport, currCrm, prevCrm] = apiResponse;
       setCurrSupportSub(currSupport);
       setPrevSupportSub(prevSupport);
