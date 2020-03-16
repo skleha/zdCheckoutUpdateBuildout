@@ -204,7 +204,6 @@ $.mockjax({
       cvv: request.data.paymentInfo.cvv
     }
 
-    console.log(JSON.stringify(currPaymentInfo));
     currPaymentInfo = newData;
     this.responseText = currPaymentInfo;
   }
