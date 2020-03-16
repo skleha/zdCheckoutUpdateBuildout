@@ -48,7 +48,7 @@ const Updates = (props) => {
     }
     
     if (selectCrmSub.plan !== undefined) {
-      await SubscriptionAPIUtil.updateCurrentSub("Support", selectCrmSub);
+      await SubscriptionAPIUtil.updateCurrentSub("CRM", selectCrmSub);
     }
 
     props.history.push("/confirm");
@@ -75,7 +75,8 @@ const Updates = (props) => {
           currentSub={currSupportSub}
           plansAndNames={supportPlans}
           onNewSubSelect={setSelectSupportSub}
-          />
+        />
+
         <PlanUpdate
           product={"CRM"}
           currentSub={currCrmSub}
