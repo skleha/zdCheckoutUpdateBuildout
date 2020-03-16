@@ -9,9 +9,11 @@ const Updates = (props) => {
   const [currSupportSub, setCurrSupportSub] = useState({});
   const [selectSupportSub, setSelectSupportSub] = useState({});
   const [supportPlans, setSupportPlans] = useState({});
+ 
   const [currCrmSub, setCurrCrmSub] = useState({});
   const [selectCrmSub, setSelectCrmSub] = useState({});
   const [crmPlans, setCrmPlans] = useState({});
+ 
   const [isLoading, setIsLoading] = useState(true);
   const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
 
@@ -38,7 +40,6 @@ const Updates = (props) => {
   // fetchAllData fires API requests in parallel and then sets state
   const fetchAllData = async () => {
 
-    
     const apiResponse = await Promise.all([
       SubscriptionAPIUtil.fetchCurrentPlan('Support'),
       SubscriptionAPIUtil.fetchAvailablePlans('Support'),
