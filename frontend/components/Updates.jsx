@@ -14,6 +14,7 @@ const Updates = () => {
 
 
   useEffect( () => {
+    
     const fetchAllData = async () => {
     
       // Run all fetch requests in parallel
@@ -23,7 +24,6 @@ const Updates = () => {
         SubscriptionAPIUtil.fetchCurrentPlan('CRM'),
         SubscriptionAPIUtil.fetchAvailablePlans('CRM')
       ])
-
 
       // Set state with result from API call
       const [currSupportSub, supportPlans, currCrmSub, crmPlans] = apiResponse;
