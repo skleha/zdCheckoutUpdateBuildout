@@ -7,8 +7,10 @@ import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 const Updates = () => {
 
   const [currSupportSub, setCurrSupportSub] = useState({});
+  const [selectSupportSub, setSelectSupportSub] = useState({});
   const [supportPlans, setSupportPlans] = useState({});
   const [currCrmSub, setCurrCrmSub] = useState({});
+  const [selectCrmSub, setSelectCrmSub] = useState({});
   const [crmPlans, setCrmPlans] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,8 +40,7 @@ const Updates = () => {
 
   }, []);
 
-  // define update plan here
-  // 
+  
   
 
   if (isLoading) {
@@ -61,11 +62,13 @@ const Updates = () => {
           product={"Support"} 
           currentSub={currSupportSub}
           plansAndNames={supportPlans}
+          onNewSubSelect={setSelectSupportSub}
           />
         <PlanUpdate
           product={"CRM"}
           currentSub={currCrmSub}
           plansAndNames={crmPlans}
+          onNewSubSelect={setSelectCrmSub}
         />
       </div>
     );
