@@ -13,34 +13,43 @@ const Updates = (props) => {
   const [selectCrmSub, setSelectCrmSub] = useState({});
   const [crmPlans, setCrmPlans] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [updateButtonEnabled, setUpdateButtonEnabled] = useState(true);
+  const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
 
   useEffect(() => {
-    
-    const fetchAllData = async () => {
-    
-      // Run all fetch requests in parallel
-      const apiResponse = await Promise.all([
-        SubscriptionAPIUtil.fetchCurrentPlan('Support'),
-        SubscriptionAPIUtil.fetchAvailablePlans('Support'),
-        SubscriptionAPIUtil.fetchCurrentPlan('CRM'),
-        SubscriptionAPIUtil.fetchAvailablePlans('CRM')
-      ])
-
-      // Set state with result from API call
-      const [currSupportSub, supportPlans, currCrmSub, crmPlans] = apiResponse;
-      setCurrSupportSub(currSupportSub);
-      setSupportPlans(supportPlans);
-      setCurrCrmSub(currCrmSub);
-      setCrmPlans(crmPlans);
-      setIsLoading(false);
+    if (isLoading) {
+      fetchAllData();
+    } else {
+      
+      if (selectSupportSub.plan === undefined && 
+          selectCrmSub.plan === undefined) {
+            setUpdateButtonEnabled(false);
+          } else {
+            setUpdateButtonEnabled(true);
+          }
     }
+    
+  }, [selectSupportSub, selectCrmSub]);
 
-    fetchAllData();
+  const fetchAllData = async () => {
 
-  }, []);
+    // Run all fetch requests in parallel
+    const apiResponse = await Promise.all([
+      SubscriptionAPIUtil.fetchCurrentPlan('Support'),
+      SubscriptionAPIUtil.fetchAvailablePlans('Support'),
+      SubscriptionAPIUtil.fetchCurrentPlan('CRM'),
+      SubscriptionAPIUtil.fetchAvailablePlans('CRM')
+    ])
 
-  
+    // Set state with result from API call
+    const [currSupportSub, supportPlans, currCrmSub, crmPlans] = apiResponse;
+    setCurrSupportSub(currSupportSub);
+    setSupportPlans(supportPlans);
+    setCurrCrmSub(currCrmSub);
+    setCrmPlans(crmPlans);
+    setIsLoading(false);
+  }
+
+
   const handleUpdateClick = async () => {
     
     if (selectSupportSub.plan !== undefined) {
