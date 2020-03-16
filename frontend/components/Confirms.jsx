@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as SubscriptionAPIUtil from '../utils/subscription_api_util';
-import PlanConfirm from './PlanConfirm2';
+import PlanConfirm from './PlanConfirm';
 
 const Confirms = () => {
 
