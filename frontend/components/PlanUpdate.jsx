@@ -10,7 +10,7 @@ function PlanUpdate(props) {
   const [selectedSub, setSelectedSub] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
-  const [errors, setErrors] = useState(false);
+  const [error, setError] = useState(false);
 
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function PlanUpdate(props) {
     } else {
       props.onNewSubSelect({});
     }
-    
+
   };
 
 
@@ -80,9 +80,9 @@ function PlanUpdate(props) {
   
     return null;
   
-  } else if (errors) {
+  } else if (error) {
   
-    return "Subscription Data Not Available";
+    return `${props.product} subscription data not available`;
   
   } else {
 

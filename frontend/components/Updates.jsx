@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import * as SubscriptionAPIUtil from "../utils/subscription_api_util";
 
 
-const Updates = () => {
+const Updates = (props) => {
 
   const [currSupportSub, setCurrSupportSub] = useState({});
   const [selectSupportSub, setSelectSupportSub] = useState({});
@@ -41,6 +41,18 @@ const Updates = () => {
   }, []);
 
   
+  const handleUpdateClick = async () => {
+    
+    if (selectSupportSub.plan !== undefined) {
+      await SubscriptionAPIUtil.updateCurrentSub("Support", selectSupportSub);
+    }
+    
+    if (selectCrmSub.plan !== undefined) {
+      await SubscriptionAPIUtil.updateCurrentSub("Support", selectCrmSub);
+    }
+
+    props.history.push("/confirm");
+  }
   
 
   if (isLoading) {
@@ -70,6 +82,14 @@ const Updates = () => {
           plansAndNames={crmPlans}
           onNewSubSelect={setSelectCrmSub}
         />
+
+        <button
+          className="update-button"
+          onClick={handleUpdateClick}>
+          Update
+        </button>
+
+
       </div>
     );
   }
