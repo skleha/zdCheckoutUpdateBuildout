@@ -15,7 +15,11 @@ const Updates = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
 
+
+  // useEffect calls fetchAllData and sets state at first
+  // On update of plans, useEffect toggles update button
   useEffect(() => {
+    
     if (isLoading) {
       fetchAllData();
     } else {
@@ -30,9 +34,11 @@ const Updates = (props) => {
     
   }, [selectSupportSub, selectCrmSub]);
 
+
+  // fetchAllData fires API requests in parallel and then sets state
   const fetchAllData = async () => {
 
-    // Run all fetch requests in parallel
+    
     const apiResponse = await Promise.all([
       SubscriptionAPIUtil.fetchCurrentPlan('Support'),
       SubscriptionAPIUtil.fetchAvailablePlans('Support'),
@@ -40,7 +46,6 @@ const Updates = (props) => {
       SubscriptionAPIUtil.fetchAvailablePlans('CRM')
     ])
 
-    // Set state with result from API call
     const [currSupportSub, supportPlans, currCrmSub, crmPlans] = apiResponse;
     setCurrSupportSub(currSupportSub);
     setSupportPlans(supportPlans);
@@ -49,7 +54,7 @@ const Updates = (props) => {
     setIsLoading(false);
   }
 
-
+  // handleUpdateClick fires API calls and sets the current subscription
   const handleUpdateClick = async () => {
     
     if (selectSupportSub.plan !== undefined) {
@@ -64,6 +69,7 @@ const Updates = (props) => {
   }
   
 
+  // Return 'loading' on mounting of component
   if (isLoading) {
 
     return ("Loading...");
