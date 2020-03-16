@@ -54,8 +54,17 @@ function PlanUpdate(props) {
       hasSeatsChanged
     } = helperFuncs.hasSubscriptionChanged(newSub, props.currentSub);
     
+    // Set component state
     setSelectedSub(newSub);
     setUpdateButtonEnabled((hasPlanChanged || hasSeatsChanged) && validSeatNum);
+
+    // Set parent state if different subscription with valid seats
+    if ((hasPlanChanged || hasSeatsChanged) && validSeatNum) {
+      props.onNewSubSelect(newSub);
+    } else {
+      props.onNewSubSelect({});
+    }
+    
   };
 
 
