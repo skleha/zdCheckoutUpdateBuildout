@@ -1,7 +1,7 @@
 # Checkout App
 
 #### To View
-After cloning to your desktop, open `index.html`.  On my machine, I use VS Code and an extension, LiveServer, so that changes 
+Cloning to your desktop, `npm install` and open `index.html`.  On my machine, I use VS Code and an extension, LiveServer, so that changes 
 to the code render in real time.
 <br></br>
 
