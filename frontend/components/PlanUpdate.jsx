@@ -9,11 +9,11 @@ function PlanUpdate(props) {
   
   const [selectedSub, setSelectedSub] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
   const [error, setError] = useState(false);
 
 
   useEffect(() => {
+    // Handle API error here:  if no current sub, then setError(true);
     const { plan, name, seats, cost } = props.currentSub;
     const newSub = new Subscription(plan, name, seats, cost);
     setSelectedSub(newSub);
@@ -47,6 +47,7 @@ function PlanUpdate(props) {
   const handleSubscriptionChange = async (plan, planName, seats) => {
     const validSeatNum = helperFuncs.validateSeatNum(seats);
     const { cost } = validSeatNum ? await SubscriptionAPIUtil.fetchPlanPricing(props.product, plan, seats) : { cost: 0 }
+    
     const newSub = new Subscription(plan, planName, seats, cost);
 
     const {
@@ -56,7 +57,6 @@ function PlanUpdate(props) {
     
     // Set component state
     setSelectedSub(newSub);
-    setUpdateButtonEnabled((hasPlanChanged || hasSeatsChanged) && validSeatNum);
 
     // Set parent state if different subscription with valid seats
     if ((hasPlanChanged || hasSeatsChanged) && validSeatNum) {
@@ -67,14 +67,7 @@ function PlanUpdate(props) {
 
   };
 
-
-  const handleUpdatePlanClick = async (e) => {
-    await SubscriptionAPIUtil.updateCurrentSub(props.product, selectedSub);
-    props.history.push("/confirm");
-  };
-  
   const plans = Object.keys(props.plansAndNames);
-
 
   if (isLoading) {
   

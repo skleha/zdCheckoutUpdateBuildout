@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as SubscriptionAPIUtil from '../utils/subscription_api_util';
 import PlanConfirm from './PlanConfirm';
 
-const Confirms = () => {
+const Confirms = (props) => {
 
   const [currSupportSub, setCurrSupportSub] = useState({});
   const [prevSupportSub, setPrevSupportSub] = useState({});
@@ -33,6 +33,15 @@ const Confirms = () => {
 
   }, []);
 
+
+  const handleBackClick = () => {
+    SubscriptionAPIUtil.deletePreviousPlan("Support");
+    SubscriptionAPIUtil.deletePreviousPlan("CRM");
+    props.history.push('/');
+  }
+
+
+
   if (isLoading) {
 
     return ("Loading...");
@@ -54,6 +63,13 @@ const Confirms = () => {
           previousSub={prevCrmSub}
           currentSub={currCrmSub} />
         
+        <button
+          className="update-button"
+          onClick={handleBackClick}>
+          Back
+        </button>
+
+
       </div>
     );
 

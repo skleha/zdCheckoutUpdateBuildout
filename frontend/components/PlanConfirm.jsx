@@ -9,11 +9,6 @@ function PlanConfirm(props) {
 
   if (props.previousSub === "") return null;
 
-  const handleBackClick = async (e) => {
-    await SubscriptionAPIUtil.deletePreviousPlan(props.product);
-    props.history.push('/');
-  }
-
   const {
     hasPlanChanged,
     hasSeatsChanged,
@@ -32,7 +27,9 @@ function PlanConfirm(props) {
 
   return ( 
     <div className="confirm-component">
+    
       <div className="confirm-title"></div>
+    
       <div className="confirm-grid-container">
         <div className="confirm-grid-title">{`${props.product} Plan`}</div>
         <div className="confirm-grid-header">Previous Subscription</div>
@@ -47,12 +44,7 @@ function PlanConfirm(props) {
         <div className="confirm-grid-data" data-testid="previous-cost">{props.previousSub.cost}</div>
         <div className={costChangeClassName} data-testid="current-cost">{props.currentSub.cost}</div>
       </div>
-      <button
-        className="confirm-back-button"
-        data-testid="back-button"
-        onClick={handleBackClick}>
-          Back
-      </button>
+    
     </div>
   );
 }
