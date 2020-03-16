@@ -40,8 +40,7 @@ const Confirms = (props) => {
     props.history.push('/');
   }
 
-
-
+  
   if (isLoading) {
 
     return ("Loading...");

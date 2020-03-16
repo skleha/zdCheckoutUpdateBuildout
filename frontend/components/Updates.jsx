@@ -13,9 +13,9 @@ const Updates = (props) => {
   const [selectCrmSub, setSelectCrmSub] = useState({});
   const [crmPlans, setCrmPlans] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
+  const [updateButtonEnabled, setUpdateButtonEnabled] = useState(true);
 
-  useEffect( () => {
+  useEffect(() => {
     
     const fetchAllData = async () => {
     
@@ -86,6 +86,7 @@ const Updates = (props) => {
 
         <button
           className="update-button"
+          disabled={!updateButtonEnabled}
           onClick={handleUpdateClick}>
           Update
         </button>
