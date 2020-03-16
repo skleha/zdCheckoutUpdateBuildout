@@ -118,13 +118,6 @@ function PlanUpdate(props) {
 
           <div className="update-cost" data-testid="cost">{selectedSub.cost}</div>
         </div>
-
-        <button
-          className="update-button"
-          disabled={!updateButtonEnabled}
-          onClick={handleUpdatePlanClick}>
-            Update
-        </button>
       
       </div>
     );
