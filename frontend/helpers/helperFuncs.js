@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 
 export const validateSeatNum = seats => {
   const typeConvertedSeats = Number(seats);
@@ -11,24 +10,3 @@ export const hasSubscriptionChanged = (selectedSub, currentSub) => {
   const hasCostChanged = selectedSub.cost !== currentSub.cost;
   return { hasPlanChanged, hasSeatsChanged, hasCostChanged }
 };
-
-export const useDebounce = (value, delay) => {
-
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    
-    const handler = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(handler);
-    }
-      
-    }, [value]
-  );
-
-  return debouncedValue;
-
-}
