@@ -20,7 +20,7 @@ function PlanUpdate(props) {
     setIsLoading(false);
   }, []);
 
-
+  
   const handlePlanChange = (e) => {
     const selectedPlan = e.target.value;
     const selectedName = props.plansAndNames[selectedPlan];
@@ -33,14 +33,18 @@ function PlanUpdate(props) {
   };
 
 
+  let timerId;
   const handleSeatChange = (e) => {
     const seats = e.target.value;
+    clearTimeout(timerId);
 
-    handleSubscriptionChange(
-      selectedSub.plan,
-      selectedSub.name,
-      seats
-    );
+    timerId = setTimeout(() => {
+      handleSubscriptionChange(
+        selectedSub.plan,
+        selectedSub.name,
+        seats
+      )}, 500)
+    
   };
 
 
@@ -91,7 +95,7 @@ function PlanUpdate(props) {
           <select
             className="update-select"
             data-testid="plan-select"
-            value={selectedSub.plan}
+            defaultValue={selectedSub.plan}
             onChange={handlePlanChange}
           >
             {plans.map((plan, idx) => (
@@ -105,7 +109,7 @@ function PlanUpdate(props) {
             type="number"
             className="update-input"
             data-testid="seats-select"
-            value={selectedSub.seats}
+            defaultValue={selectedSub.seats}
             onChange={handleSeatChange}
           />
 
