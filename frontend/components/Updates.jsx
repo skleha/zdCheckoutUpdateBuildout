@@ -9,21 +9,21 @@ const Updates = (props) => {
   const [currSupportSub, setCurrSupportSub] = useState({});
   const [selectSupportSub, setSelectSupportSub] = useState({});
   const [supportPlans, setSupportPlans] = useState({});
- 
   const [currCrmSub, setCurrCrmSub] = useState({});
   const [selectCrmSub, setSelectCrmSub] = useState({});
-  const [crmPlans, setCrmPlans] = useState({});
- 
+  const [crmPlans, setCrmPlans] = useState({}); 
   const [isLoading, setIsLoading] = useState(true);
   const [updateButtonEnabled, setUpdateButtonEnabled] = useState(false);
 
 
-  // useEffect calls fetchAllData and sets state at first
-  // On update of plans, useEffect toggles update button
+  // On mounting, useEffect calls fetchAllData and sets state
+  // On remounting, useEffect toggles update button  disable
   useEffect(() => {
     
     if (isLoading) {
+
       fetchAllData();
+    
     } else {
       
       if (selectSupportSub.plan === undefined && 
@@ -38,6 +38,7 @@ const Updates = (props) => {
 
 
   // fetchAllData fires API requests in parallel and then sets state
+  // Need error handling for backend error
   const fetchAllData = async () => {
 
     const apiResponse = await Promise.all([
