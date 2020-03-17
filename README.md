@@ -10,11 +10,11 @@ To view the app, try the following after cloning:
 #### Brief Summary of the User Experience
 The checkout app mimics a self-service flow for a subscription based software product.  On initial render, the user is presented with 
 the attributes of their existing plan:  current plan name, current seats and current cost.  The user may alter either the plan or
-the number of seats.  Should the user update the plan or the seats, the app will fetch the new cost per seat from a mocked backend
-and update the pricing.  Upon change the plan -- and not before -- the user is able to save the new subscription.  These subscription
-attributes are saved to the backend, and the user is served a confirmation page.  This confirmation page shows both previous and current
-subscription data, with new data highlighted in a different font color.  The user may then click on the "Back" button to render the
-initial subscription update page.  The new subscription is displayed and the process can begin again.
+the number of seats for each plan.  Should the user update the plan or the seats, the app will fetch the new cost per seat from a mocked
+backend and update the pricing for that plan.  Upon `Update` the new plan(s) are persisted to the mocked database, and the user is served
+a confirmation page.  This confirmation page shows both previous and current subscription data, with new data highlighted in a different
+font color.  The user may then click on the "Back" button to render the initial subscription update page.  The new subscription is
+displayed and the process can begin again.
 
 #### Key Specifications
 * The app should display the existing subscription information upon load (fetched from the
