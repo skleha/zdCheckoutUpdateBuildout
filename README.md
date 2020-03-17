@@ -1,8 +1,10 @@
 # Checkout App
 
 #### To View
-To see the app, try the following after cloning: (1) `npm install` to install dependencies, (2) `npm run webpack` to create bundle.js
-and (3) open `index.html`.  On my machine, I use VS Code and an extension, LiveServer, so that changes to the code render in real time.
+To view the app, try the following after cloning:
+* `npm install` to install dependencies,
+* `npm run webpack` to create bundle.js,
+* open `index.html`.
 <br></br>
 
 #### Brief Summary of the User Experience
