@@ -2,9 +2,9 @@
 
 #### To View
 To view the app, try the following after cloning:
-* `npm install` to install dependencies,
-* `npm run webpack` to create bundle.js,
-* open `index.html`.
+* `npm install` to install dependencies
+* `npm run webpack` to create bundle.js
+* open `index.html`
 <br></br>
 
 #### Brief Summary of the User Experience
