@@ -1,7 +1,7 @@
 # Checkout App
 
 #### To View
-To view the app, try the following after cloning:
+After cloning the app:
 * `npm install` to install dependencies
 * `npm run webpack` to create bundle.js
 * open `index.html`
